@@ -42,24 +42,14 @@ namespace PizzaShack.Mock
   }
 },
   new Pizza(){
-    Name = "Pepperoni",
+    Name = "Pep",
     Toppings = new List<Topping>(){
  AvailToppings.GetValueOrDefault("pepperoni"),
     }
 },
   };
-    public static List<Order> Orders = new List<Order>()
-    {
-      new Order(){
-      Pizzas = new List<Pizza>(){
-          new Pizza(){
-            Toppings = new List<Topping>(){
-              AvailToppings.GetValueOrDefault("pepperoni")
-            }
-          }
-        }
-    }
+    public static List<Order> Orders = new List<Order>();
 
-    };
+    public static object AvailableToppings { get; internal set; }
   }
 }

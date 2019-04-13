@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PizzaShack.Mock;
@@ -13,6 +14,29 @@ namespace PizzaShack.Controllers
     public ActionResult<IEnumerable<Order>> Get()
     {
       return FakeDb.Orders;
+    }
+    //api/orders could go here
+    [HttpPost]
+    public ActionResult<Order> Create([FromBody] List<OrderRequest> request)
+
+    {
+      Order o = new Order();
+      try
+      {
+
+        request.ForEach(r => o.Pizzas.Add(r.FullfillRequest()));
+        return o;
+      }
+      //error catch
+      catch (Exception e)
+      {
+
+        return BadRequest(new
+        {
+          error = e.Message,
+          StatusCode = 400
+        });
+      }
     }
   }
 }
